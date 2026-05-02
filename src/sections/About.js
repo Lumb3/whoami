@@ -9,7 +9,13 @@ function About() {
       title="Automation-minded engineering with a clear, practical edge."
     >
       <div className="about__layout">
-        <p className="about__copy">{about.intro}</p>
+        <div className="about__story">
+          <p className="about__copy">{about.intro}</p>
+          <div className="mission-panel">
+            <span>Mission</span>
+            <p>{about.mission}</p>
+          </div>
+        </div>
 
         <article className="education-card" aria-label="University of Utah education">
           <div className="school-mark">
@@ -47,6 +53,12 @@ function About() {
               <span className="tag tag--accent" key={course}>
                 {course}
               </span>
+            ))}
+          </div>
+
+          <div className="milestone-list">
+            {about.education.milestones.map((milestone) => (
+              <span key={milestone}>{milestone}</span>
             ))}
           </div>
         </article>

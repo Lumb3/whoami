@@ -168,22 +168,18 @@ function Contact() {
                 technical conversations.
               </p>
             </div>
-            <div className="contact__links">
+            <div className="resume-card">
+              <p className="contact__label">Resume</p>
               <a
-                className="button button--secondary"
-                href={contact.linkedin}
-                rel="noreferrer"
-                target="_blank"
+                className="button"
+                href={
+                  contact.resumeUrl ||
+                  `mailto:${contact.email}?subject=Resume request for Erkhembileg Ariunbold`
+                }
+                rel={contact.resumeUrl ? 'noreferrer' : undefined}
+                target={contact.resumeUrl ? '_blank' : undefined}
               >
-                LinkedIn
-              </a>
-              <a
-                className="button button--secondary"
-                href={contact.github}
-                rel="noreferrer"
-                target="_blank"
-              >
-                GitHub
+                {contact.resumeUrl ? 'Open Resume' : 'Request Resume'}
               </a>
             </div>
           </div>
@@ -273,6 +269,24 @@ function Contact() {
               {isSending ? 'Sending...' : 'Send Message'}
             </button>
           </form>
+        </div>
+        <div className="contact-socials" aria-label="Social links">
+          <a
+            className="contact-social"
+            href={contact.linkedin}
+            rel="noreferrer"
+            target="_blank"
+          >
+            LinkedIn
+          </a>
+          <a
+            className="contact-social"
+            href={contact.github}
+            rel="noreferrer"
+            target="_blank"
+          >
+            GitHub
+          </a>
         </div>
       </SectionWrapper>
 

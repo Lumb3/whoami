@@ -7,26 +7,16 @@ import Contact from './sections/Contact';
 import Experience from './sections/Experience';
 import Hero from './sections/Hero';
 import Projects from './sections/Projects';
+import TechStack from './sections/TechStack';
 import { navLinks } from './data/portfolioData';
 
 function App() {
   const [activeSection, setActiveSection] = useState(navLinks[0].id);
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = window.localStorage.getItem('portfolio-theme');
-
-    if (savedTheme) {
-      return savedTheme;
-    }
-
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
-  });
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem('portfolio-theme', theme);
-  }, [theme]);
+    document.documentElement.removeAttribute('data-theme');
+    window.localStorage.removeItem('portfolio-theme');
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -56,18 +46,11 @@ function App() {
 
   return (
     <div className="site-shell">
-      <Navbar
-        activeSection={activeSection}
-        onToggleTheme={() =>
-          setTheme((currentTheme) =>
-            currentTheme === 'light' ? 'dark' : 'light'
-          )
-        }
-        theme={theme}
-      />
+      <Navbar activeSection={activeSection} />
       <main>
         <Hero />
         <About />
+        <TechStack />
         <AcademicWork />
         <Projects />
         <Experience />

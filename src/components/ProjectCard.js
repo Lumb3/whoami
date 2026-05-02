@@ -25,6 +25,9 @@ function ProjectCard({ project }) {
       <div className="project-card__body">
         <h3 className="card__title">{project.title}</h3>
         <p className="card__description">{project.description}</p>
+        {project.impact && (
+          <p className="project-card__impact">{project.impact}</p>
+        )}
 
         <div className="tag-list" aria-label={`${project.title} tech stack`}>
           {project.techStack.map((tech) => (
