@@ -277,7 +277,7 @@ function Contact() {
             rel="noreferrer"
             target="_blank"
           >
-            LinkedIn
+            <img src="https://skillicons.dev/icons?i=linkedin"/>
           </a>
           <a
             className="contact-social"
@@ -285,7 +285,7 @@ function Contact() {
             rel="noreferrer"
             target="_blank"
           >
-            GitHub
+            <img src="https://skillicons.dev/icons?i=github"/>
           </a>
         </div>
       </SectionWrapper>
