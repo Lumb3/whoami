@@ -6,7 +6,10 @@ const initialFormValues = {
   name: '',
   email: '',
   message: '',
+  company: '',
 };
+
+const contactEndpoint = `https://formsubmit.co/ajax/${contact.email}`;
 
 function validateContactForm(values) {
   const errors = {};
@@ -24,6 +27,8 @@ function validateContactForm(values) {
 
   if (!values.message.trim()) {
     errors.message = 'Message cannot be empty.';
+  } else if (values.message.trim().length < 20) {
+    errors.message = 'Please include at least 20 characters.';
   }
 
   return errors;
@@ -35,6 +40,7 @@ function Contact() {
   const [touched, setTouched] = useState({});
   const [isSending, setIsSending] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -55,6 +61,10 @@ function Contact() {
     if (successMessage) {
       setSuccessMessage('');
     }
+
+    if (errorMessage) {
+      setErrorMessage('');
+    }
   };
 
   const handleBlur = (event) => {
@@ -71,10 +81,14 @@ function Contact() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (isSending) {
+      return;
+    }
+
+    if (formValues.company.trim()) {
       return;
     }
 
@@ -88,6 +102,7 @@ function Contact() {
     });
     setErrors(validationErrors);
     setSuccessMessage('');
+    setErrorMessage('');
 
     if (hasErrors) {
       return;
@@ -95,13 +110,41 @@ function Contact() {
 
     setIsSending(true);
 
-    window.setTimeout(() => {
+    try {
+      const response = await fetch(contactEndpoint, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formValues.name.trim(),
+          email: formValues.email.trim(),
+          message: formValues.message.trim(),
+          _replyto: formValues.email.trim(),
+          _subject: `Portfolio contact from ${formValues.name.trim()}`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || result.success === false) {
+        throw new Error(result.message || 'Message delivery failed.');
+      }
+
       setIsSending(false);
       setFormValues(initialFormValues);
       setTouched({});
       setErrors({});
-      setSuccessMessage("Thank you. I'll get back to you soon.");
-    }, 700);
+      setSuccessMessage('Message sent successfully. I will get back to you soon.');
+    } catch (error) {
+      setIsSending(false);
+      setErrorMessage(
+        'The message could not be sent right now. Please email me directly at a.erkhembileg9@gmail.com.'
+      );
+    }
   };
 
   const getFieldClassName = (fieldName) =>
@@ -146,6 +189,16 @@ function Contact() {
           </div>
 
           <form className="contact-form" noValidate onSubmit={handleSubmit}>
+            <input
+              aria-hidden="true"
+              autoComplete="off"
+              className="contact-form__trap"
+              name="company"
+              onChange={handleChange}
+              tabIndex="-1"
+              type="text"
+              value={formValues.company}
+            />
             <div className="contact-form__row">
               <label className={getFieldClassName('name')}>
                 <span>Name</span>
@@ -207,6 +260,12 @@ function Contact() {
             {successMessage && (
               <p className="form-status form-status--success" role="status">
                 {successMessage}
+              </p>
+            )}
+
+            {errorMessage && (
+              <p className="form-status form-status--error" role="alert">
+                {errorMessage}
               </p>
             )}
 

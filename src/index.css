@@ -3,43 +3,47 @@
 }
 
 :root {
-  --background: #f4f7f9;
+  --background: #f6f8fb;
   --surface: #ffffff;
-  --surface-muted: #edf3f7;
-  --section-tint: #eef4fb;
+  --surface-muted: #edf2f7;
+  --section-tint: #eef5fb;
   --text: #111827;
   --text-soft: #4b5563;
-  --text-muted: #69778a;
-  --line: #dce5eb;
-  --line-strong: #bfd0dc;
+  --text-muted: #66758a;
+  --line: #d7e1ea;
+  --line-strong: #b8c9d8;
   --accent: #2563eb;
-  --accent-strong: #1d4ed8;
+  --accent-strong: #1746b8;
   --accent-contrast: #ffffff;
   --accent-soft: #dbeafe;
   --accent-secondary: #0f766e;
-  --accent-warm: #b7791f;
+  --accent-warm: #a16207;
+  --danger: #c2414b;
+  --success: #0f766e;
   --radius: 8px;
   --shadow: 0 18px 46px rgba(30, 64, 175, 0.08);
   --title-body-gap: 24px;
 }
 
 [data-theme='dark'] {
-  --background: #171717;
-  --surface: #202020;
-  --surface-muted: #292927;
-  --section-tint: #1c1d1b;
-  --text: #f2f0ea;
-  --text-soft: #c9c5bc;
-  --text-muted: #969187;
-  --line: #34342f;
-  --line-strong: #4a483f;
-  --accent: #c9a46a;
-  --accent-strong: #e4c57e;
-  --accent-contrast: #171717;
-  --accent-soft: #302a20;
-  --accent-secondary: #8fb7ad;
-  --accent-warm: #d6b06f;
-  --shadow: 0 18px 46px rgba(0, 0, 0, 0.38);
+  --background: #111827;
+  --surface: #182233;
+  --surface-muted: #223047;
+  --section-tint: #162235;
+  --text: #f8fafc;
+  --text-soft: #d3deeb;
+  --text-muted: #a8b5c7;
+  --line: #33445c;
+  --line-strong: #4d6380;
+  --accent: #6aa7ff;
+  --accent-strong: #9cc6ff;
+  --accent-contrast: #07111f;
+  --accent-soft: #17385f;
+  --accent-secondary: #67d7c3;
+  --accent-warm: #f0c36d;
+  --danger: #ff8c98;
+  --success: #7be0cb;
+  --shadow: 0 22px 58px rgba(0, 0, 0, 0.34);
 }
 
 html {
@@ -81,6 +85,7 @@ button {
 .site-shell {
   min-height: 100vh;
   background:
+    radial-gradient(circle at 12% 4%, color-mix(in srgb, var(--accent-soft) 40%, transparent), transparent 32%),
     linear-gradient(180deg, var(--background) 0%, var(--section-tint) 48%, var(--background) 100%);
 }
 
@@ -177,6 +182,11 @@ button {
   font-size: 0.7rem;
 }
 
+[data-theme='dark'] .navbar {
+  background: color-mix(in srgb, var(--background) 82%, transparent);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+}
+
 .section {
   position: relative;
   border-top: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
@@ -194,7 +204,7 @@ button {
   align-items: center;
   border-top: 0;
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 62%, transparent), transparent 44%),
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 54%, transparent), transparent 44%),
     linear-gradient(180deg, var(--background), transparent 68%);
 }
 
@@ -324,6 +334,10 @@ button {
   transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
 }
 
+[data-theme='dark'] .button {
+  color: #07111f;
+}
+
 .button:hover {
   background: var(--accent-strong);
   border-color: var(--accent-strong);
@@ -336,6 +350,11 @@ button {
   background: color-mix(in srgb, var(--surface) 82%, transparent);
   color: var(--accent-strong);
   box-shadow: none;
+}
+
+[data-theme='dark'] .button--secondary {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--accent-strong);
 }
 
 .button--secondary:hover {
@@ -360,6 +379,7 @@ button {
 }
 
 .education-card {
+  position: relative;
   display: grid;
   gap: 22px;
   align-content: start;
@@ -373,25 +393,28 @@ button {
 }
 
 .education-card__header {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 18px;
-  align-items: start;
+  max-width: calc(100% - 168px);
 }
 
 .school-mark {
+  position: absolute;
+  top: 24px;
+  right: 24px;
   display: grid;
-  width: 64px;
-  height: 64px;
+  width: clamp(118px, 32%, 150px);
+  min-height: 58px;
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
-  border-radius: 50%;
-  background: var(--accent-soft);
-  color: var(--accent-strong);
-  font-size: 2rem;
-  font-weight: 800;
-  letter-spacing: 0;
-  box-shadow: inset 0 0 0 6px color-mix(in srgb, var(--surface) 72%, transparent);
+  border: 1px solid color-mix(in srgb, #be0000 24%, var(--line));
+  border-radius: var(--radius);
+  padding: 10px;
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(190, 0, 0, 0.04);
+}
+
+.school-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .education-card__label {
@@ -417,6 +440,7 @@ button {
 }
 
 .education-card__meta {
+  margin-top: 6px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
@@ -518,6 +542,128 @@ button {
   padding: 26px;
 }
 
+.project-card {
+  overflow: hidden;
+  padding: 0;
+}
+
+.project-card__media,
+.project-card__visual {
+  position: relative;
+  min-height: 190px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-muted);
+}
+
+.project-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 260ms ease;
+}
+
+.project-card:hover .project-card__media img,
+.project-card:hover .project-card__visual-grid {
+  transform: scale(1.035);
+}
+
+.project-card__visual {
+  display: grid;
+  align-items: end;
+  isolation: isolate;
+  padding: 22px;
+  color: #f8fafc;
+}
+
+.project-card__visual::before {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(135deg, rgba(5, 13, 28, 0.15), rgba(5, 13, 28, 0.76)),
+    linear-gradient(135deg, #2563eb, #0f766e 58%, #111827);
+  content: '';
+}
+
+.project-card__visual--cyan::before {
+  background:
+    linear-gradient(135deg, rgba(5, 13, 28, 0.12), rgba(5, 13, 28, 0.76)),
+    linear-gradient(135deg, #0e7490, #1d4ed8 54%, #2e1065);
+}
+
+.project-card__visual-grid {
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(135deg, rgba(0, 0, 0, 0.95), transparent 72%);
+  transition: transform 260ms ease;
+}
+
+.project-card__visual-mark {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+}
+
+.project-card__visual-content {
+  display: grid;
+  gap: 9px;
+  max-width: calc(100% - 62px);
+}
+
+.project-card__visual-content span {
+  width: fit-content;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 999px;
+  padding: 6px 9px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.project-card__visual-content strong {
+  max-width: 260px;
+  font-size: 1.55rem;
+  line-height: 1.05;
+}
+
+.project-card__visual-content em {
+  color: rgba(248, 250, 252, 0.82);
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 650;
+}
+
+.project-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 24px;
+}
+
 .certificate-card {
   gap: 22px;
   overflow: hidden;
@@ -600,12 +746,18 @@ button {
   font-weight: 650;
 }
 
+[data-theme='dark'] .tag {
+  background: color-mix(in srgb, var(--surface-muted) 78%, var(--accent-soft));
+  color: var(--text-soft);
+}
+
 .tag--accent {
   background: var(--accent-soft);
   color: var(--accent-strong);
 }
 
 .project-card__actions {
+  align-items: flex-end;
   margin-top: 24px;
 }
 
@@ -765,6 +917,11 @@ button {
   transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
+.field input::placeholder,
+.field textarea::placeholder {
+  color: color-mix(in srgb, var(--text-muted) 82%, transparent);
+}
+
 .field textarea {
   min-height: 150px;
   resize: vertical;
@@ -778,14 +935,20 @@ button {
 
 .field--error input,
 .field--error textarea {
-  border-color: color-mix(in srgb, #d14d4d 82%, var(--line));
-  box-shadow: 0 0 0 3px color-mix(in srgb, #d14d4d 12%, transparent);
+  border-color: color-mix(in srgb, var(--danger) 82%, var(--line));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 14%, transparent);
 }
 
 .field__error {
-  color: #d14d4d;
+  color: var(--danger);
   font-size: 0.82rem;
   line-height: 1.4;
+}
+
+.contact-form__trap {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
 }
 
 .form-status {
@@ -799,9 +962,15 @@ button {
 }
 
 .form-status--success {
-  border: 1px solid color-mix(in srgb, var(--accent-secondary) 34%, var(--line));
-  background: color-mix(in srgb, var(--accent-secondary) 12%, var(--surface));
-  color: var(--accent-secondary);
+  border: 1px solid color-mix(in srgb, var(--success) 34%, var(--line));
+  background: color-mix(in srgb, var(--success) 12%, var(--surface));
+  color: var(--success);
+}
+
+.form-status--error {
+  border: 1px solid color-mix(in srgb, var(--danger) 34%, var(--line));
+  background: color-mix(in srgb, var(--danger) 11%, var(--surface));
+  color: var(--danger);
 }
 
 .contact-form__submit {
@@ -877,6 +1046,17 @@ button {
   .education-card__meta,
   .education-card__highlights {
     grid-template-columns: 1fr;
+  }
+
+  .education-card__header {
+    max-width: none;
+    padding-top: 82px;
+  }
+
+  .school-mark {
+    left: 24px;
+    right: auto;
+    width: 150px;
   }
 
   .timeline__item {

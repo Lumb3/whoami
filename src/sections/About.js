@@ -12,10 +12,13 @@ function About() {
         <p className="about__copy">{about.intro}</p>
 
         <article className="education-card" aria-label="University of Utah education">
+          <div className="school-mark">
+            <img
+              alt="The University of Utah"
+              src={about.education.logo}
+            />
+          </div>
           <div className="education-card__header">
-            <div className="school-mark" aria-hidden="true">
-              U
-            </div>
             <div>
               <p className="education-card__label">Education</p>
               <h3>{about.education.institution}</h3>

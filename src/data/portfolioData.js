@@ -21,6 +21,8 @@ export const about = {
     'Computer Engineering student focused on automation, software systems, teaching, and applied ML.',
   education: {
     institution: 'The University of Utah',
+    logo:
+      'https://upload.wikimedia.org/wikipedia/commons/3/30/University_of_Utah_horizontal_logo.svg',
     degree: 'B.S. Computer Engineering',
     graduation: 'Fall 2027',
     location: 'Salt Lake City, UT',
@@ -90,6 +92,13 @@ export const certificates = [
     credentialUrl:
       'https://www.coursera.org/account/accomplishments/verify/RGLHCTGMB2J8',
   },
+  {
+    title: 'UAC CTF Volume 2',
+    issuer: 'UAC Cybersecurity Club',
+    year: '2025',
+    image: '/UAC_CTF_cert.png',
+    credentialUrl: 'https://zwique.gitbook.io/zwique_notes/achievements/accomplishments',
+  }
 ];
 
 export const projects = [
@@ -97,6 +106,12 @@ export const projects = [
     title: 'Bookmarker',
     description:
       'Chrome extension for saving and revisiting YouTube timestamps.',
+    visual: {
+      eyebrow: 'Chrome Extension',
+      title: 'Timestamp Recall',
+      metric: 'YouTube workflow',
+      tone: 'blue',
+    },
     techStack: ['HTML', 'CSS', 'JavaScript', 'Chrome Extension'],
     github: null,
     demo: null,
@@ -105,6 +120,12 @@ export const projects = [
     title: 'IdeaVault',
     description:
       'Desktop note app with secure storage, speech-to-text, and PostgreSQL.',
+    visual: {
+      eyebrow: 'Desktop App',
+      title: 'Secure Note System',
+      metric: 'Speech to text',
+      tone: 'cyan',
+    },
     techStack: ['Electron.js', 'PostgreSQL', 'JavaScript', 'Vosk API'],
     github: null,
     demo: null,
